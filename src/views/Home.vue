@@ -53,265 +53,37 @@
       </a-carousel>
     </template>
   </HomeColumn>
+  <!-- 精品课程 -->
   <HomeColumn title="精品课程" icon="read">
     <template v-slot:content>
       <a-row>
-        <a-col :span='6'>
-          <CourseCard courseImage="http://116.62.196.215/data/file/course/wangluokongjiananquangainian/thumb." title="网络空间安全概念" charpterCount=3 trainingCount=21 experimentCount=0 powerpointCount=3 tag="基础知识"></CourseCard>
-        </a-col>
-        <a-col :span='6'>
-          <CourseCard></CourseCard>
-        </a-col>
-        <a-col :span='6'>
-          <CourseCard></CourseCard>
-        </a-col>
-        <a-col :span='6'>
-          <CourseCard></CourseCard>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span='6'>
-          <CourseCard></CourseCard>
-        </a-col>
-        <a-col :span='6'>
-          <CourseCard></CourseCard>
-        </a-col>
-        <a-col :span='6'>
-          <CourseCard></CourseCard>
-        </a-col>
-        <a-col :span='6'>
-          <CourseCard></CourseCard>
+        <!-- 精品课程卡片 -->
+        <a-col :span='6' v-for="item in courseProData" :key="item.id">
+          <CourseCard :coursePro="item"></CourseCard>
         </a-col>
       </a-row>
     </template>
   </HomeColumn>
+  <!-- 实训 -->
   <HomeColumn title="实训" icon="dashboard">
     <template v-slot:content>
       <a-row>
-        <a-col :span='6'>
-          <TrainingCard name="绞尽脑汁的数据包" difficulty="中等" score="300分" tags="杂项"></TrainingCard>
-        </a-col>
-        <a-col :span='6'>
-          <TrainingCard></TrainingCard>
-        </a-col>
-        <a-col :span='6'>
-          <TrainingCard></TrainingCard>
-        </a-col>
-        <a-col :span='6'>
-          <TrainingCard></TrainingCard>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span='6'>
-          <TrainingCard></TrainingCard>
-        </a-col>
-        <a-col :span='6'>
-          <TrainingCard></TrainingCard>
-        </a-col>
-        <a-col :span='6'>
-          <TrainingCard></TrainingCard>
-        </a-col>
-        <a-col :span='6'>
-          <TrainingCard></TrainingCard>
+        <a-col :span='6' v-for="item in trainingData" :key="item.id">
+          <TrainingCard :training="item"></TrainingCard>
         </a-col>
       </a-row>
       <button class="more"><a href="#">更多</a></button>
     </template>
   </HomeColumn>
+  <!-- 工具 -->
   <HomeColumn title="工具" icon="tool">
     <template v-slot:content>
       <a-row>
-        <a-col :span="2">
+        <a-col :span="2" v-for="item in toolData" :key="item.id">
           <button class="tool-button">
             <a href="#">
               <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-      </a-row>
-            <a-row>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
-            </a>
-          </button>
-        </a-col>
-        <a-col :span="2">
-          <button class="tool-button">
-            <a href="#">
-              <a-icon type="tool" style="marginRight:5px"></a-icon>
-              安卓逆向
+              {{item.name}}
             </a>
           </button>
         </a-col>
@@ -327,7 +99,11 @@ import HomeColumn from '@/components/Home/HomeColumn.vue'
 import ColumnCard from '@/components/Home/ColumnCard.vue'
 import CourseCard from '@/components/Home/CourseCard.vue'
 import TrainingCard from '@/components/Home/TrainingCard.vue'
-import {Listcarousel} from '@/api/Home/carousel.js'
+import {carouselList} from '@/api/Home/carousel.js'
+import {courseProList} from '@/api/Home/course.js'
+import {traningList} from '@/api/Home/training.js'
+import {toolList} from '@/api/Home/tool.js'
+
 export default {
   name:'home',
   components:{
@@ -339,19 +115,46 @@ export default {
   data(){
     return {
       // 轮播图
-      carouselData:[]
+      carouselData:[],
+      // 精品课程
+      courseProData:[],
+      // 实训
+      trainingData:[],
+      // 工具
+      toolData:[]
     }
   },
   created(){
     // 获取轮播图
     this.getCarouselList()
+    // 获取精品课程
+    this.getCourseProList()
+    // 获取实训
+    this.getTrainingList()
+    // 获取工具列表
+    this.getToolList()
   },
   methods:{
     // 获取轮播图
     async getCarouselList(){
-      const { data: res } = await Listcarousel()
+      const { data: res } = await carouselList()
       this.carouselData = res
-    }
+    },
+    // 获取精品课程
+    async getCourseProList(){
+      const { data: res } = await courseProList()
+      this.courseProData = res
+    },
+    // 获取实训列表
+    async getTrainingList(){
+      const { data: res } = await traningList()
+      this.trainingData = res
+    },
+    // 获取工具列表
+    async getToolList(){
+      const { data: res } = await toolList()
+      this.toolData = res
+    }    
   }
 }
 </script>

@@ -1,8 +1,8 @@
 import request from '@/utils/request.js'
 
-export const menuList = function () {
+export const toolList = function () {
   return request({
-    url: '/home/menu',
+    url: '/tool',
     method: 'get'
   })
 }

@@ -1,16 +1,18 @@
 <template>
+<!-- 实训卡片 -->
   <div class="training-card">
+    <!-- 跳转链接 -->
     <a href="#">
-      <a-card :title=name>
+      <a-card :title="training.name">
         <a-row>
           <a-col :span="8">
-            <a-tag>{{difficulty}}</a-tag>
+            <a-tag>{{training.difficulty}}</a-tag>
           </a-col>
           <a-col :span="8">
-            <a-tag>{{score}}</a-tag>
+            <a-tag>{{training.score}}分</a-tag>
           </a-col>
           <a-col :span="8">
-            <a-tag>{{tags}}</a-tag>
+            <a-tag>{{training.classification}}</a-tag>
           </a-col>
         </a-row>
         <a-divider />
@@ -28,12 +30,13 @@
 <script>
 export default {
   name:'training-card',
-  props:[
-    'name',
-    'difficulty',
-    'score',
-    'tags'
-  ]
+  props:{
+    training:{
+      default:()=>{
+        return {}
+      }
+    }
+  }
 }
 </script>
 

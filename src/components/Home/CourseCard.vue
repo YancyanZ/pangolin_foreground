@@ -1,53 +1,62 @@
 <template>
+  <!-- 精品课程卡片 -->
   <div class="course-card">
+    <!-- 跳转链接 -->
     <a href="#">
       <a-card>
+        <!-- 课程封面 -->
         <div class="course-img">
-          <img :src=courseImage>
+          <img :src="coursePro.img">
         </div>
+        <!-- 课程名称 -->
         <a-tooltip>
           <template slot="title">
-            {{title}}
+            {{coursePro.name}}
           </template>
-          <h3 class="title">{{title}}</h3>
+          <h3 class="title">{{coursePro.name}}</h3>
         </a-tooltip>
         <div class="count-icon">
-          <a-tooltip v-if="charpterCount!=0">
+          <!-- 章节数量 -->
+          <a-tooltip v-if="coursePro.chapterNum!=0">
             <template slot="title">
               章节数量
             </template>
             <span class="charpter">
-              <a-icon type="file-text" theme="filled" style="color:#f6ab39;marginRight:3px;"></a-icon>{{charpterCount}}
+              <a-icon type="file-text" theme="filled" style="color:#f6ab39;marginRight:3px;"></a-icon>{{coursePro.chapterNum}}
             </span>
           </a-tooltip>
-          <a-tooltip v-if="trainingCount!=0">
+          <!-- 实训数量 -->
+          <a-tooltip v-if="coursePro.trainingNum!=0">
             <template slot="title">
               实训数量
             </template>
             <span class="training" >
-              <a-icon type="dashboard" style="color:#f6ab39;marginRight:3px;"></a-icon>{{trainingCount}}
+              <a-icon type="dashboard" style="color:#f6ab39;marginRight:3px;"></a-icon>{{coursePro.trainingNum}}
             </span>
           </a-tooltip>
-          <a-tooltip v-if="experimentCount!=0">
+          <!-- 实验数量 -->
+          <a-tooltip v-if="coursePro.experimentNum!=0">
             <template slot="title">
               实验数量
             </template>
             <span class="experiment" >
-              <a-icon type="experiment" theme="filled" style="color:#f6ab39;marginRight:3px;"></a-icon>{{experimentCount}}
+              <a-icon type="experiment" theme="filled" style="color:#f6ab39;marginRight:3px;"></a-icon>{{coursePro.experimentNum}}
             </span>
           </a-tooltip>
-          <a-tooltip  v-if="powerpointCount!=0">
+          <!-- 课件数量 -->
+          <a-tooltip  v-if="coursePro.pptNum!=0">
             <template slot="title">
               课件数量
             </template>
             <span class="powerpoint">
-              <a-icon type="snippets" theme="filled" style="color:#f6ab39;marginRight:3px;"></a-icon>{{powerpointCount}}
+              <a-icon type="snippets" theme="filled" style="color:#f6ab39;marginRight:3px;"></a-icon>{{coursePro.pptNum}}
             </span>            
           </a-tooltip>
         </div>
+        <!-- 课程分类 -->
         <a-row>
           <a-col :span="6" :offset="18">
-            <a-tag color="red">{{tag}}</a-tag>
+            <a-tag color="red">{{coursePro.classification}}</a-tag>
           </a-col>
         </a-row>
       </a-card>
@@ -58,15 +67,13 @@
 <script>
 export default {
   name:'course-card',
-  props:[
-    'courseImage',
-    'title',
-    'charpterCount',
-    'trainingCount',
-    'experimentCount',
-    'powerpointCount',
-    'tag'
-  ]
+  props:{
+    coursePro:{
+      default:()=>{
+        return {}
+      }
+    }
+  }
 }
 </script>
 

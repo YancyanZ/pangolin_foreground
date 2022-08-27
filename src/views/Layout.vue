@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {Listmenu} from '@/api/Home/menu.js'
+import {menuList} from '@/api/Home/menu.js'
 import Header from '@/components/Home/Header.vue'
 import Footer from '@/components/Home/Footer.vue'
 export default {
@@ -30,9 +30,8 @@ export default {
   },
   methods:{
     async getMenulList(){
-      const {data:res} = await Listmenu()
+      const {data:res} = await menuList()
       this.menuData=res
-      console.log(res)
     }
   }
 }
