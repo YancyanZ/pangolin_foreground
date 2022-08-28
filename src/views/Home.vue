@@ -23,7 +23,7 @@
       <a-icon type="right" />
     </div>
     <!-- 轮播图片 -->
-    <div v-for="item in carouselData" :key="item.id"><img :src="item.img" alt=""></div>
+    <div v-for="item in carouselData" :key="item.crlId"><img :src="item.crlPicture" alt=""></div>
   </a-carousel>
   <!-- 栏目 -->
   <HomeColumn title="栏目分类" icon="tags">
@@ -58,7 +58,7 @@
     <template v-slot:content>
       <a-row>
         <!-- 精品课程卡片 -->
-        <a-col :span='6' v-for="item in courseProData" :key="item.id">
+        <a-col :span='6' v-for="item in courseProData" :key="item.traId">
           <CourseCard :coursePro="item"></CourseCard>
         </a-col>
       </a-row>
@@ -79,11 +79,11 @@
   <HomeColumn title="工具" icon="tool">
     <template v-slot:content>
       <a-row>
-        <a-col :span="2" v-for="item in toolData" :key="item.id">
+        <a-col :span="2" v-for="item in toolData" :key="item.toolId">
           <button class="tool-button">
             <a href="#">
               <a-icon type="tool" style="marginRight:5px"></a-icon>
-              {{item.name}}
+              {{item.toolName}}
             </a>
           </button>
         </a-col>
@@ -143,7 +143,9 @@ export default {
     // 获取精品课程
     async getCourseProList(){
       const { data: res } = await courseProList()
-      this.courseProData = res
+      console.log(res)
+      this.courseProData = res.list
+      
     },
     // 获取实训列表
     async getTrainingList(){

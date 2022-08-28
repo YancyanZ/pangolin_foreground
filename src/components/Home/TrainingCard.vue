@@ -3,22 +3,22 @@
   <div class="training-card">
     <!-- 跳转链接 -->
     <a href="#">
-      <a-card :title="training.name">
+      <a-card :title="training.traName">
         <a-row>
           <a-col :span="8">
-            <a-tag>{{training.difficulty}}</a-tag>
+            <a-tag>{{training.traDifficulty}}</a-tag>
           </a-col>
           <a-col :span="8">
-            <a-tag>{{training.score}}分</a-tag>
+            <a-tag>{{training.traScore}}分</a-tag>
           </a-col>
           <a-col :span="8">
-            <a-tag>{{training.classification}}</a-tag>
+            <a-tag>{{training.traCategory}}</a-tag>
           </a-col>
         </a-row>
         <a-divider />
         <a-row>
           <a-col :span="24" style="color:#bebebe">
-            solved:0
+            solved:{{training.traSolved}}
           </a-col>
         </a-row>
       </a-card>

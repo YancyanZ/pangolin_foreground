@@ -10,8 +10,8 @@
       <a-menu-item key="home">
         <router-link to="/home">首页</router-link>
       </a-menu-item>
-      <a-menu-item v-for="item in menuList" :key="item.ename">
-        <router-link to="/home">{{item.cname}}</router-link>
+      <a-menu-item v-for="item in menuList" :key="item.navId">
+        <router-link to="/home">{{item.navName}}</router-link>
       </a-menu-item>
     </a-menu>
     </header>
