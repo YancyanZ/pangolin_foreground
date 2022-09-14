@@ -2,7 +2,7 @@ import request from '@/utils/request.js'
 
 export const toolList = function () {
   return request({
-    url: '/tool',
+    url: 'process/tool/list',
     method: 'get'
   })
 }

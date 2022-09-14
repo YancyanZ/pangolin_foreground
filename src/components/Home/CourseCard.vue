@@ -6,7 +6,7 @@
       <a-card>
         <!-- 课程封面 -->
         <div class="course-img">
-          <img :src="coursePro.couPicture">
+          <img :src="`data:image/png;base64,${coursePro.couPicture}`">
         </div>
         <!-- 课程名称 -->
         <a-tooltip>

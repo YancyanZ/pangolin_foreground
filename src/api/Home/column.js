@@ -1,8 +1,8 @@
 import request from '@/utils/request.js'
 
-export const traningList = function () {
+export const columnlList = function () {
   return request({
-    url: 'process/training/list',
+    url: 'process/column/list',
     method: 'get'
   })
 }

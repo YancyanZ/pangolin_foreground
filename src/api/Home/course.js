@@ -2,7 +2,7 @@ import request from '@/utils/request.js'
 
 export const courseProList = function () {
   return request({
-    url: '/course/prolist',
+    url: 'process/course/prolist',
     method: 'get'
   })
 }

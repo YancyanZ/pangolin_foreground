@@ -2,7 +2,7 @@ import request from '@/utils/request.js'
 
 export const carouselList = function () {
   return request({
-    url: '/home/carousel',
+    url: 'process/carousel/list',
     method: 'get'
   })
 }

@@ -2,9 +2,9 @@
   <div class="clumn-card">
     <a href="#">
       <a-card style="width:416px;height:267px">
-        <span><img :src=image></span>
-        <h3 class="card-name">{{name}}</h3>
-        <p class="card-des">{{des}}</p>
+        <span><img :src="`data:image/png;base64,${column.colIcon}`"></span>
+        <h3 class="card-name">{{column.colName}}</h3>
+        <p class="card-des">{{column.colIntroduce}}</p>
       </a-card>
     </a>
   </div>
@@ -13,11 +13,13 @@
 <script>
 export default {
   name:'column-card',
-  props:[
-    'image',
-    'name',
-    'des'
-  ]
+  props:{
+    column:{
+      default:()=>{
+        return {}
+      }
+    }
+  }
 }
 </script>
 

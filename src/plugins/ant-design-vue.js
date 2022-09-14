@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { LocaleProvider, Pagination, Button,Layout,Menu, Row, Col,Carousel,Icon, Card, BackTop, Tooltip, Tag, Divider} from "ant-design-vue";
+import { LocaleProvider, Pagination, Button,Layout,Menu, Row, Col,Carousel,Icon, Card, BackTop, Tooltip, Tag, Divider, Dropdown, Input, Select ,Checkbox, FormModel} from "ant-design-vue";
 Vue.use(LocaleProvider);
 Vue.use(Pagination);
 Vue.use(Button);
@@ -14,3 +14,8 @@ Vue.use(BackTop)
 Vue.use(Tooltip)
 Vue.use(Tag)
 Vue.use(Divider)
+Vue.use(Dropdown)
+Vue.use(Input)
+Vue.use(Select)
+Vue.use(Checkbox)
+Vue.use(FormModel)
