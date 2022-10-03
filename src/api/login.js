@@ -16,3 +16,23 @@ export function login(parameter) {
     data: parameter
   })
 }
+
+// 获取用户信息
+export function getInfo () {
+  return request({
+    url:'/getInfo',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}
+
+//用户注册
+export function register(parameter) {
+  return request({
+    url: '/login',
+    method: 'post',
+    data: parameter
+  })
+}

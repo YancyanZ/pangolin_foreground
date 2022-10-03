@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card title="注册" :bordered="false">
-      <a-form-model :model="regForm" :rules="regRules" :wrapperCol="{span:22,offset:1}">
+      <a-form-model :model="regForm" :rules="regRules" :wrapperCol="{span:22,offset:1}" ref="regForm">
         <a-form-model-item prop="name">
           <a-input v-model="regForm.name" placeholder="请输入用户名">
             <a-icon slot="addonBefore" type="user" />
@@ -28,22 +28,22 @@
           </a-input>
         </a-form-model-item>
         <a-form-model-item>
-          <a-select placeholder="请选择班级...">
-            <a-select-option value="jack">
+          <a-select placeholder="请选择班级..." v-model="regForm.class">
+            <a-select-option value="1">
               行政1班
             </a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item style="height:auto">
           <a-col :span="14">
-              <a-input placeholder="验证码" />
+              <a-input placeholder="验证码" v-model="regForm.code"/>
             </a-col>
             <a-col :span="8" :offset="2">
               <img class="getCaptcha" :src="codeUrl" @click="getCode">
             </a-col>
         </a-form-model-item >
         <a-form-model-item :wrapperCol="{span:24}" style="height:auto">
-          <a-checkbox>我已认真阅读充分理解并接受
+          <a-checkbox v-model="regForm.check">我已认真阅读充分理解并接受
             <a href="#">隐私协议</a>
             和
             <a href="#">用户协议</a>
@@ -57,7 +57,7 @@
               <a-button ghost @click="back">返回登录</a-button>
             </a-col>
             <a-col :span="8" :offset="8">
-              <a-button class="res_btn">马上注册</a-button>
+              <a-button class="res_btn" @click="register">马上注册</a-button>
             </a-col>
           </a-row>
         </a-col>
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import {getCodeImg,register} from '@/api/login.js'
 export default {
   name:'reg-card',
   data(){
@@ -80,10 +81,15 @@ export default {
         phone:'',
         password:'',
         rePassword:'',
-        trueName:''
+        trueName:'',
+        class:undefined,
+        code:'',
+        uuid:'',
+        check:false
       },
       // 验证规则
       regRules:{
+        // 缺少验证两次密码输入验证
         name: [
           { required: true, message: '用户名不能为空', trigger: 'blur' },
         ],
@@ -106,11 +112,26 @@ export default {
     back(){
       this.$emit('transfer',false)
     },
-    getCode () {
-      getCodeImg().then(res => {
-        this.codeUrl = 'data:image/gif;base64,' + res.img
-        // this.form.uuid = res.uuid
-      })
+    // 获取验证码图片
+    async getCode() {
+      const { data: res } = await getCodeImg()
+      this.codeUrl = 'data:image/gif;base64,' + res.img
+      this.regForm.uuid = res.uuid
+    },
+    // 注册点击事件
+    register(){
+      if(this.regForm.check==false){
+        alert('请仔细阅读用户协议和隐私协议并确认!')
+        return false
+      }
+      this.$refs.regForm.validate(async valid => {
+        if (valid) {
+          // const {data:res} = await register(this.loginForm)
+          alert('已提交信息，请等待审核。')
+        } else {
+          return false;
+        }
+      });
     }
   }
 }
@@ -158,6 +179,7 @@ export default {
     /* display: block; */
     width: 100%;
     height: 32px;
+    margin-top: -4px;
 }
 .ant-form-item >>> .ant-form-explain{
   font-size: 12px;

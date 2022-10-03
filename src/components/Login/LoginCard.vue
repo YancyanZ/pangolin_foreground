@@ -44,8 +44,8 @@ export default {
       codeUrl:'',
       // 表单数据
       loginForm:{
-        username:'',
-        password:'',
+        username:'admin',
+        password:'admin123',
         code:'',
         uuid:''
       },
@@ -92,6 +92,8 @@ export default {
           }
           // 本地存储token
           localStorage.setItem('ACCESS_TOKEN',res.token)
+          this.$store.commit('SET_TOKEN',res.token)
+          this.$store.commit('SET_NAME', this.loginForm.username)
           this.$router.push('/home')
         } else {
           return false;

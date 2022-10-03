@@ -1,26 +1,35 @@
 <template>
   <div class="header">
-    <header class="w">
-    <!-- logo -->
-    <div class="logo">
-      <img src="@/assets/logo.svg" alt="" width="100px">
-    </div>
-    <!-- 导航菜单 -->
-    <a-menu v-model="current" mode="horizontal">
-      <a-menu-item key="home">
-        <router-link to="/home">首页</router-link>
-      </a-menu-item>
-      <a-menu-item v-for="item in menuList" :key="item.navId">
-        <router-link to="/home">{{item.navName}}</router-link>
-      </a-menu-item>
-    </a-menu>
+    <header class="w header-container">
+      <!-- logo -->
+      <div class="logo">
+        <img src="@/assets/logo.svg" alt="" width="100px">
+      </div>
+      <!-- 账户 -->
+      <div class="account">
+        <AvatarDropdown></AvatarDropdown>
+      </div>
+      <!-- 导航菜单 -->
+      <a-menu v-model="current" mode="horizontal">
+        <a-menu-item key="home">
+          <router-link to="/home">首页</router-link>
+        </a-menu-item>
+        <a-menu-item v-for="item in menuList" :key="item.navId">
+          <router-link to="/home">{{item.navName}}</router-link>
+        </a-menu-item>
+      </a-menu>
+
     </header>
   </div>
 </template>
 
 <script>
+import AvatarDropdown from './AvatarDropdown.vue'
 export default {
   name:'Header',
+  components:{
+    AvatarDropdown
+  },
   props:{
     menuList:{
       type: Array,
@@ -42,9 +51,19 @@ export default {
   width: 100%;
   height: 64px;
   background-color: #fff;
+  margin-bottom: 10px;
+  .header-container{
+    position: relative;
+  }
   .logo{
     margin-top: 2px;
-  float: left;
+    float: left;
+  }
+  .account{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0,-50%);
   }
   .ant-menu,
   .ant-menu-item,

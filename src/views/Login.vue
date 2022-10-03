@@ -1,5 +1,7 @@
 <template>
   <div class="login_container">
+    <!-- 背景粒子效果 -->
+    <Particles></Particles>
     <!-- 语言下拉选择框 -->
     <div class="login_language">
       <a-dropdown :trigger="['click']" placement="bottomCenter">
@@ -18,8 +20,6 @@
         </a-menu>
       </a-dropdown>
     </div>
-    <!-- 背景粒子效果 -->
-    <Particles></Particles>
     <div class="login_wrap">
       <!-- 上方gif图片 -->
       <div class="head"></div>
