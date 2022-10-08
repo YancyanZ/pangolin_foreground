@@ -21,7 +21,7 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item label="生日">
-        <a-date-picker placeholder="生日" v-model="infoForm.birth"/>
+        <a-date-picker placeholder="生日" v-model="infoForm.birthday"/>
       </a-form-item>
       <a-form-item label="邮箱">
         <a-input placeholder="请输入邮箱.." v-model="infoForm.mail"></a-input>
@@ -52,14 +52,14 @@
 import {getUser} from '@/api/system/user.js'
 export default {
   created(){
-    this.getUser()
+    // this.getUser()
   },
   data(){
     return {
       user:{},
       infoForm:{
         sno:'',
-        sex:undefined,
+        sex:1,
         birthday:'',
         email:'',
         qq:'',
@@ -74,7 +74,7 @@ export default {
     // 获取用户信息
     async getUser(){
       const { data: res } = await getUser(this.$store.state.username)
-      this.user = res
+      this.user = res.username
 
       this.infoForm.sno = res.sno
       this.infoForm.sex = res.sex

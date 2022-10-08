@@ -52,13 +52,13 @@ export default {
       // 验证规则
       loginRules:{
         username: [
-          { required: true, message: '用户名不能为空', trigger: 'blur' }
+          { required: true, message: '用户名不能为空', trigger: 'blur', whitespace: true }
         ],
         password: [
-          { required: true, message: '密码不能为空', trigger: 'blur' }
+          { required: true, message: '密码不能为空', trigger: 'blur', whitespace: true }
         ],
         code: [
-          { required: true, message: '请输入验证码', trigger: 'blur' }
+          { required: true, message: '请输入验证码', trigger: 'blur', whitespace: true }
         ]
       }
     }

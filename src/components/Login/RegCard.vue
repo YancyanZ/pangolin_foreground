@@ -2,8 +2,8 @@
   <div>
     <a-card title="注册" :bordered="false">
       <a-form-model :model="regForm" :rules="regRules" :wrapperCol="{span:22,offset:1}" ref="regForm">
-        <a-form-model-item prop="name">
-          <a-input v-model="regForm.name" placeholder="请输入用户名">
+        <a-form-model-item prop="username">
+          <a-input v-model="regForm.username" placeholder="请输入用户名">
             <a-icon slot="addonBefore" type="user" />
           </a-input>
         </a-form-model-item>
@@ -13,17 +13,17 @@
           </a-input>
         </a-form-model-item>
         <a-form-model-item prop="password">
-          <a-input v-model="regForm.password" placeholder="请输入密码">
+          <a-input-password v-model="regForm.password" placeholder="请输入密码">
             <a-icon slot="addonBefore" type="lock"/>
-          </a-input>
+          </a-input-password>
         </a-form-model-item>
         <a-form-model-item prop="rePassword">
-          <a-input v-model="regForm.rePassword" placeholder="确认密码">
+          <a-input-password v-model="regForm.rePassword" placeholder="确认密码">
             <a-icon slot="addonBefore" type="lock"/>
-          </a-input>
+          </a-input-password>
         </a-form-model-item>
-        <a-form-model-item prop="trueName">
-          <a-input v-model="regForm.trueName" placeholder="请输入真实姓名">
+        <a-form-model-item prop="realName">
+          <a-input v-model="regForm.realName" placeholder="请输入真实姓名">
             <a-icon slot="addonBefore" type="user" />
           </a-input>
         </a-form-model-item>
@@ -36,11 +36,13 @@
         </a-form-model-item>
         <a-form-model-item style="height:auto">
           <a-col :span="14">
+            <a-form-model-item prop="code">
               <a-input placeholder="验证码" v-model="regForm.code"/>
-            </a-col>
-            <a-col :span="8" :offset="2">
-              <img class="getCaptcha" :src="codeUrl" @click="getCode">
-            </a-col>
+          </a-form-model-item>
+          </a-col>
+          <a-col :span="8" :offset="2">
+            <img class="getCaptcha" :src="codeUrl" @click="getCode">
+          </a-col>
         </a-form-model-item >
         <a-form-model-item :wrapperCol="{span:24}" style="height:auto">
           <a-checkbox v-model="regForm.check">我已认真阅读充分理解并接受
@@ -72,16 +74,23 @@ import {getCodeImg,register} from '@/api/login.js'
 export default {
   name:'reg-card',
   data(){
+    let validatePass = (rule, value, callback) => {
+      if (value !== this.regForm.password) {
+        callback(new Error('确认密码不一致'));
+      } else {
+        callback();
+      }
+    };
     return {
       options:[],
       codeUrl:'',
       // 表单数据
       regForm:{
-        name:'',
+        username:'',
         phone:'',
         password:'',
         rePassword:'',
-        trueName:'',
+        realName:'',
         class:undefined,
         code:'',
         uuid:'',
@@ -89,18 +98,29 @@ export default {
       },
       // 验证规则
       regRules:{
-        // 缺少验证两次密码输入验证
-        name: [
-          { required: true, message: '用户名不能为空', trigger: 'blur' },
+        username: [
+          { required: true, message: '用户名不能为空', trigger: 'blur', whitespace: true },
+          { min: 1, max: 18, message: '用户名长度不能大于18字符', trigger: 'blur' },
         ],
         phone: [
-          { required: true, message: '请填写手机号码...', trigger: 'blur' },
+          { required: true, message: '请填写手机号码...', trigger: 'blur', whitespace: true },
+          { pattern: /^1(3|4|5|6|7|8|9)\d{9}$/, message: '请填写正确的手机号码...', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: '密码不能为空', trigger: 'blur' },
+          { required: true, message: '密码不能为空', trigger: 'blur', whitespace: true },
+          { min: 1, max: 18, message: '密码长度不能大于18字符', trigger: 'blur' },
         ],
         rePassword: [
-          { required: true, message: '确认密码不能为空', trigger: 'blur' },
+          { required: true, message: '确认密码不能为空', trigger: 'blur', whitespace: true },
+          { min: 1, max: 18, message: '确认密码长度不能大于18字符', trigger: 'blur' },
+          { validator: validatePass, trigger: 'blur' }
+        ],
+        realName: [
+          { required: true, message: '真实姓名不能为空', trigger: 'blur', whitespace: true },
+          { min: 1, max: 5, message: '真实姓名长度不能大于5字符', trigger: 'blur' },
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur', whitespace: true }
         ]
       }
     }
@@ -126,8 +146,12 @@ export default {
       }
       this.$refs.regForm.validate(async valid => {
         if (valid) {
-          // const {data:res} = await register(this.loginForm)
-          alert('已提交信息，请等待审核。')
+          const {data:res} = await register(this.loginForm)
+          if(res.code == 200 ){
+            alert('已提交信息，请等待审核。')
+          }else{
+            alert(res.msg)
+          }
         } else {
           return false;
         }
