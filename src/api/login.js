@@ -29,10 +29,10 @@ export function getInfo () {
 }
 
 //用户注册
-export function register(parameter) {
+export function register(data) {
   return request({
-    url: '/login',
+    url: '/process/student',
     method: 'post',
-    data: parameter
+    data: data
   })
 }

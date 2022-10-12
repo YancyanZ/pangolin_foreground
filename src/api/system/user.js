@@ -12,7 +12,7 @@ import { praseStrEmpty } from '@/utils/aidex'
 // 查询用户详细(使用用户名)
 export function getUser (username) {
   return request({
-    url: '/system/user/' + praseStrEmpty(username),
+    url: '/process/student/' + praseStrEmpty(username),
     method: 'get'
   })
 }

@@ -3,11 +3,11 @@
     <h1 class="title">我的信息</h1>
     <a-form :form="infoForm" :label-col="{span:2,offset:1}" :wrapper-col="{ span: 10}" labelAlign="left">
       <a-form-item label="用户名称">
-        <span class="ant-form-text">{{user.user_name}}</span>
+        <span class="ant-form-text">{{user.userName}}</span>
       </a-form-item>
       <a-form-item label="真实姓名">
         <span class="ant-form-text">
-        {{user.real_name}}
+        {{user.realName}}
         </span>
       </a-form-item>
       <a-form-item label="学号">
@@ -52,14 +52,14 @@
 import {getUser} from '@/api/system/user.js'
 export default {
   created(){
-    // this.getUser()
+    this.getUser()
   },
   data(){
     return {
       user:{},
       infoForm:{
         sno:'',
-        sex:1,
+        sex:undefined,
         birthday:'',
         email:'',
         qq:'',
@@ -75,18 +75,18 @@ export default {
     async getUser(){
       const { data: res } = await getUser(this.$store.state.username)
       this.user = res.username
+      console.log('res',res)
+      console.log('user',this.user)
 
-      this.infoForm.sno = res.sno
-      this.infoForm.sex = res.sex
-      this.infoForm.birthday = res.birthday
-      this.infoForm.email = res.email
-      this.infoForm.qq = res.qq
-      this.infoForm.wechat = res.wechat
-      this.infoForm.phone = res.phone
-      this.infoForm.address = res.address
-      this.infoForm.signature = res.signature
-
-      console.log(this.user)
+      this.infoForm.sno = res.username.sno
+      this.infoForm.sex = res.username.sex
+      this.infoForm.birthday = res.username.birthday
+      this.infoForm.email = res.username.email
+      this.infoForm.qq = res.username.qq
+      this.infoForm.wechat = res.username.wechat
+      this.infoForm.phone = res.username.phone
+      this.infoForm.address = res.username.address
+      this.infoForm.signature = res.username.signature
     }
   }
 }

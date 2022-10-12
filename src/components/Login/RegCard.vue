@@ -2,13 +2,13 @@
   <div>
     <a-card title="注册" :bordered="false">
       <a-form-model :model="regForm" :rules="regRules" :wrapperCol="{span:22,offset:1}" ref="regForm">
-        <a-form-model-item prop="username">
-          <a-input v-model="regForm.username" placeholder="请输入用户名">
+        <a-form-model-item prop="userName">
+          <a-input v-model="regForm.userName" placeholder="请输入用户名">
             <a-icon slot="addonBefore" type="user" />
           </a-input>
         </a-form-model-item>
-        <a-form-model-item prop="phone">
-          <a-input v-model="regForm.phone" placeholder="手机号码">
+        <a-form-model-item prop="phonenumber">
+          <a-input v-model="regForm.phonenumber" placeholder="手机号码">
             <a-icon slot="addonBefore" type="phone"/>
           </a-input>
         </a-form-model-item>
@@ -22,14 +22,14 @@
             <a-icon slot="addonBefore" type="lock"/>
           </a-input-password>
         </a-form-model-item>
-        <a-form-model-item prop="realName">
-          <a-input v-model="regForm.realName" placeholder="请输入真实姓名">
+        <a-form-model-item prop="name">
+          <a-input v-model="regForm.name" placeholder="请输入真实姓名">
             <a-icon slot="addonBefore" type="user" />
           </a-input>
         </a-form-model-item>
         <a-form-model-item>
-          <a-select placeholder="请选择班级..." v-model="regForm.class">
-            <a-select-option value="1">
+          <a-select placeholder="请选择班级..." v-model="regForm.xzclass">
+            <a-select-option value="行政1班">
               行政1班
             </a-select-option>
           </a-select>
@@ -59,7 +59,7 @@
               <a-button ghost @click="back">返回登录</a-button>
             </a-col>
             <a-col :span="8" :offset="8">
-              <a-button class="res_btn" @click="register">马上注册</a-button>
+              <a-button class="res_btn" @click="handleRegister">马上注册</a-button>
             </a-col>
           </a-row>
         </a-col>
@@ -86,25 +86,25 @@ export default {
       codeUrl:'',
       // 表单数据
       regForm:{
-        username:'',
-        phone:'',
-        password:'',
-        rePassword:'',
-        realName:'',
-        class:undefined,
+        userName:'test111',
+        phonenumber:'13967260917',
+        password:'cccc123478',
+        rePassword:'cccc123478',
+        name:'陈',
+        xzclass:'行政1班',
         code:'',
         uuid:'',
-        check:false
+        check:true
       },
       // 验证规则
       regRules:{
-        username: [
+        userName: [
           { required: true, message: '用户名不能为空', trigger: 'blur', whitespace: true },
           { min: 1, max: 18, message: '用户名长度不能大于18字符', trigger: 'blur' },
         ],
-        phone: [
+        phonenumber: [
           { required: true, message: '请填写手机号码...', trigger: 'blur', whitespace: true },
-          { pattern: /^1(3|4|5|6|7|8|9)\d{9}$/, message: '请填写正确的手机号码...', trigger: 'blur' }
+          { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请填写正确的手机号码...', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '密码不能为空', trigger: 'blur', whitespace: true },
@@ -115,7 +115,7 @@ export default {
           { min: 1, max: 18, message: '确认密码长度不能大于18字符', trigger: 'blur' },
           { validator: validatePass, trigger: 'blur' }
         ],
-        realName: [
+        name: [
           { required: true, message: '真实姓名不能为空', trigger: 'blur', whitespace: true },
           { min: 1, max: 5, message: '真实姓名长度不能大于5字符', trigger: 'blur' },
         ],
@@ -139,14 +139,16 @@ export default {
       this.regForm.uuid = res.uuid
     },
     // 注册点击事件
-    register(){
+    handleRegister(){
       if(this.regForm.check==false){
         alert('请仔细阅读用户协议和隐私协议并确认!')
         return false
       }
       this.$refs.regForm.validate(async valid => {
         if (valid) {
-          const {data:res} = await register(this.loginForm)
+          const saveForm = JSON.parse(JSON.stringify(this.regForm))
+          console.log('saveForm',saveForm)
+          const {data:res} = await register(saveForm)
           if(res.code == 200 ){
             alert('已提交信息，请等待审核。')
           }else{
