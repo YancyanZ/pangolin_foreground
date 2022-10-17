@@ -21,7 +21,7 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item label="生日">
-        <a-date-picker placeholder="生日" v-model="infoForm.birthday"/>
+        <a-date-picker placeholder="生日" v-model="birth"/>
       </a-form-item>
       <a-form-item label="邮箱">
         <a-input placeholder="请输入邮箱.." v-model="infoForm.mail"></a-input>
@@ -42,20 +42,21 @@
         <a-textarea :auto-size="{ minRows: 3, maxRows: 6 }" placeholder="Enter something..." v-model="infoForm.note"></a-textarea>
       </a-form-item>
       <a-form-item :wrapper-col="{span:10,offset:3}" class="submit">
-        <a-button class="submit_btn">提交</a-button>
+        <a-button class="submit_btn" @click="handleSubmit">提交</a-button>
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script>
-import {getUser} from '@/api/system/user.js'
+import {getUser, modUser} from '@/api/system/user.js'
 export default {
   created(){
     this.getUser()
   },
   data(){
     return {
+      birth:'',
       user:{},
       infoForm:{
         sno:'',
@@ -79,7 +80,7 @@ export default {
       console.log('user',this.user)
 
       this.infoForm.sno = res.username.sno
-      this.infoForm.sex = res.username.sex
+      this.infoForm.sex = res.username.sex-0
       this.infoForm.birthday = res.username.birthday
       this.infoForm.email = res.username.email
       this.infoForm.qq = res.username.qq
@@ -87,6 +88,27 @@ export default {
       this.infoForm.phone = res.username.phone
       this.infoForm.address = res.username.address
       this.infoForm.signature = res.username.signature
+
+      if(this.infoForm.birthday){
+        this.birth = this.$moment(this.infoForm.birthday,"YYYY-MM-DD")
+      }
+      
+    },
+    // 修改用户信息
+    async handleSubmit(){
+      if(this.birth){
+        this.infoForm.birthday = this.$moment(this.birth).format("YYYY-MM-DD")
+      }else{
+        this.infoForm.birthday = null
+      }
+      const saveForm = JSON.parse(JSON.stringify(this.infoForm))
+      const { data: res } = await modUser(this.$store.state.username,saveForm)
+      console.log("infoForm",saveForm)
+      if(res.code==200){
+        alert("修改用户信息成功")
+      }else{
+        alert(res.msg)
+      }
     }
   }
 }

@@ -22,8 +22,8 @@
             <a-icon slot="addonBefore" type="lock"/>
           </a-input-password>
         </a-form-model-item>
-        <a-form-model-item prop="realName">
-          <a-input v-model="regForm.realName" placeholder="请输入真实姓名">
+        <a-form-model-item prop="name">
+          <a-input v-model="regForm.name" placeholder="请输入真实姓名">
             <a-icon slot="addonBefore" type="user" />
           </a-input>
         </a-form-model-item>
@@ -90,7 +90,7 @@ export default {
         phonenumber:'13967260917',
         password:'cccc123478',
         rePassword:'cccc123478',
-        realName:'陈',
+        name:'陈',
         xzclass:'行政1班',
         code:'',
         uuid:'',
@@ -115,7 +115,7 @@ export default {
           { min: 1, max: 18, message: '确认密码长度不能大于18字符', trigger: 'blur' },
           { validator: validatePass, trigger: 'blur' }
         ],
-        realName: [
+        name: [
           { required: true, message: '真实姓名不能为空', trigger: 'blur', whitespace: true },
           { min: 1, max: 5, message: '真实姓名长度不能大于5字符', trigger: 'blur' },
         ],
