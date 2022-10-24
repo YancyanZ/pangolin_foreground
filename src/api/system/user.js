@@ -12,7 +12,7 @@ export function getUser (username) {
 // 修改用户详细
 export function modUser (username,data) {
   return request({
-    url: '/process/student/' + praseStrEmpty(username),
+    url: '/process/student/information',
     method: 'post',
     data: data
   })

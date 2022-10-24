@@ -24,7 +24,7 @@
         <a-date-picker placeholder="生日" v-model="birth"/>
       </a-form-item>
       <a-form-item label="邮箱">
-        <a-input placeholder="请输入邮箱.." v-model="infoForm.mail"></a-input>
+        <a-input placeholder="请输入邮箱.." v-model="infoForm.email"></a-input>
       </a-form-item>
       <a-form-item label="QQ号码">
         <a-input v-model="infoForm.qq"></a-input>
@@ -39,7 +39,7 @@
         <a-input v-model="infoForm.address"></a-input>
       </a-form-item>
       <a-form-item label="个性签名">
-        <a-textarea :auto-size="{ minRows: 3, maxRows: 6 }" placeholder="Enter something..." v-model="infoForm.note"></a-textarea>
+        <a-textarea :auto-size="{ minRows: 3, maxRows: 6 }" placeholder="Enter something..." v-model="infoForm.signature"></a-textarea>
       </a-form-item>
       <a-form-item :wrapper-col="{span:10,offset:3}" class="submit">
         <a-button class="submit_btn" @click="handleSubmit">提交</a-button>
@@ -59,6 +59,8 @@ export default {
       birth:'',
       user:{},
       infoForm:{
+        userName:'',
+
         sno:'',
         sex:undefined,
         birthday:'',
@@ -78,6 +80,8 @@ export default {
       this.user = res.username
       console.log('res',res)
       console.log('user',this.user)
+
+      this.infoForm.userName = this.$store.state.username
 
       this.infoForm.sno = res.username.sno
       this.infoForm.sex = res.username.sex-0
