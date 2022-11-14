@@ -68,7 +68,7 @@
 
 <script>
 import { getCodeImg } from '@/api/login.js'
-import { createDocker } from '@/api/Training/docker.js'
+import { createDocker,closeDocker } from '@/api/Training/docker.js'
 
 export default {
   data() {
@@ -76,7 +76,7 @@ export default {
       // 验证码图片
       codeUrl: '',
       dockerState: false,
-      dockerName: '',
+      dockerName: 'redis',
       dockerURL: 'http://www.baidu.com',
       trainingInfo: {
         description: 'hihihi',
@@ -97,16 +97,13 @@ export default {
       this.trainingInfo.uuid = res.uuid
     },
     async handleCreateDocker() {
-      const { data: res } = await createDocker(this.dockerName)
-      if (data.code != 200) {
-        // 弹出错误提示窗口
-        alert(res.msg)
-        return false
-      }
-      this.dockerURL = res.URL
+
+      const {data:res} = await createDocker(this.dockerName)
+      this.dockerURL = res
       this.dockerState = true
     },
-    handleCloseDocker() {
+    async handleCloseDocker() {
+      const {data:res} = await closeDocker(this.dockerName)
       this.dockerState = false
     }
   }

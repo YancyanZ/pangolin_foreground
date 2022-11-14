@@ -1,4 +1,5 @@
 import request from '@/utils/request.js'
+import { praseStrEmpty } from '@/utils/aidex'
 
 // 创建docker获取地址
 export function createDocker(traingName) {
@@ -9,9 +10,9 @@ export function createDocker(traingName) {
 }
 
 // 关闭docker
-export function closeDocker(traingID) {
+export function closeDocker(traingName) {
   return request({
-    url: '/captchaImage' + praseStrEmpty(traingID),
+    url: '/container/removecontainer/' + praseStrEmpty(traingName),
     method: 'get'
   })
 }
