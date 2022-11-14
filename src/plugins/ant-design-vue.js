@@ -1,8 +1,35 @@
-import Vue from "vue";
-import { LocaleProvider, Pagination, Button,Layout,Menu, Row, Col,Carousel,Icon, Card, BackTop, Tooltip, Tag, Divider, Dropdown, Input, Select ,Checkbox, FormModel, Avatar, Form, Radio, DatePicker, Upload} from "ant-design-vue";
-Vue.use(LocaleProvider);
-Vue.use(Pagination);
-Vue.use(Button);
+import Vue from 'vue'
+import {
+  LocaleProvider,
+  Pagination,
+  Button,
+  Layout,
+  Menu,
+  Row,
+  Col,
+  Carousel,
+  Icon,
+  Card,
+  BackTop,
+  Tooltip,
+  Tag,
+  Divider,
+  Dropdown,
+  Input,
+  Select,
+  Checkbox,
+  FormModel,
+  Avatar,
+  Form,
+  Radio,
+  DatePicker,
+  Upload,
+  ConfigProvider,
+  Descriptions
+} from 'ant-design-vue'
+Vue.use(LocaleProvider)
+Vue.use(Pagination)
+Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Menu)
 Vue.use(Row)
@@ -24,3 +51,5 @@ Vue.use(Form)
 Vue.use(Radio)
 Vue.use(DatePicker)
 Vue.use(Upload)
+Vue.use(ConfigProvider)
+Vue.use(Descriptions)

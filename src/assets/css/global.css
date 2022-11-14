@@ -7,11 +7,18 @@ body,
   line-height: 1.5;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.w{
+.w {
   width: 1280px;
   margin: 0 auto;
+}
+
+.layoutBackground {
+  background: url(@/assets/banner-bj.jpg) no-repeat;
+  background-size: 100% 480px;
+  background-position: 0 -74px;
+  padding-top: 70px;
 }

@@ -5,6 +5,9 @@ module.exports = defineConfig({
     loaderOptions: {
       less: {
         lessOptions: {
+          // modifyVars:{
+          //   'primary-color': '#f6ab39', // 全局主色
+          // },
           javascriptEnabled: true,
         },
       },

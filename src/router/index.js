@@ -9,40 +9,44 @@ import Login from '@/views/Login.vue'
 import User from '@/views/User.vue'
 import Info from '@/views/User/Info.vue'
 import Avatar from '@/views/User/Avatar.vue'
+import Training from '@/views/Training.vue'
+import TaingingDetails from '@/views/TrainingDetails.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   // 登录路由组件
-  {path:'/login',component:Login},
+  { path: '/login', component: Login },
   // 首页路由组件
-  { 
+  {
     path: '/',
     component: Layout,
     // 首页子组件
-    children:[
-      {path:'/',redirect:'home'},
+    children: [
+      { path: '/', redirect: 'home' },
       // 首页
-      {path:'home',component:Home},
+      { path: 'home', component: Home },
+      { path: 'training', component: Training },
+      { path: 'trainingdetails', component: TaingingDetails }
     ]
   },
   // 用户中心
   {
-    path:'/center',
-    component:UserLayout,
-    children:[
-      {path:'/',redirect:'/user'},
+    path: '/center',
+    component: UserLayout,
+    children: [
+      { path: '/', redirect: '/user' },
       // 个人设置
       {
-        path:'/user',
-        component:User,
-        children:[
-          {path:'/',redirect:'info'},
+        path: '/user',
+        component: User,
+        children: [
+          { path: '/', redirect: 'info' },
           // 我的信息
-          {path:'info',component:Info},
-          {path:'avatar',component:Avatar}
+          { path: 'info', component: Info },
+          { path: 'avatar', component: Avatar }
         ]
-      },
+      }
       // // 我的成长
       // {
       //   path:'/growth',
@@ -54,8 +58,7 @@ const routes = [
       //   ]
       // },
     ]
-  },
-  
+  }
 ]
 
 const router = new VueRouter({
@@ -67,13 +70,15 @@ router.beforeEach((to, from, next) => {
   // 缺少验证码失效情况
   const token = localStorage.getItem('ACCESS_TOKEN')
   if (!token) return next('/login')
-  store.commit('SET_TOKEN',token)
+  store.commit('SET_TOKEN', token)
   // store.dispatch('GetInfo')
   next()
 })
 
-router.afterEach((to,from,next)=>{
-  document.querySelector("body").setAttribute("style","overflow: auto !important;")
+router.afterEach((to, from, next) => {
+  document
+    .querySelector('body')
+    .setAttribute('style', 'overflow: auto !important;')
 })
 
 export default router
