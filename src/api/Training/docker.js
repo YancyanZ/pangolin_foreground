@@ -10,9 +10,9 @@ export function createDocker(traingName) {
 }
 
 // 关闭docker
-export function closeDocker(traingName) {
+export function closeDocker(traingID) {
   return request({
-    url: '/container/removecontainer/' + praseStrEmpty(traingName),
+    url: '/container/removecontainer/' + praseStrEmpty(traingID),
     method: 'get'
   })
 }

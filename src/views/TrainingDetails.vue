@@ -68,7 +68,7 @@
 
 <script>
 import { getCodeImg } from '@/api/login.js'
-import { createDocker,closeDocker } from '@/api/Training/docker.js'
+import { createDocker, closeDocker } from '@/api/Training/docker.js'
 
 export default {
   data() {
@@ -77,7 +77,8 @@ export default {
       codeUrl: '',
       dockerState: false,
       dockerName: 'redis',
-      dockerURL: 'http://www.baidu.com',
+      containerid: '',
+      dockerURL: '',
       trainingInfo: {
         description: 'hihihi',
         code: '',
@@ -97,13 +98,13 @@ export default {
       this.trainingInfo.uuid = res.uuid
     },
     async handleCreateDocker() {
-
-      const {data:res} = await createDocker(this.dockerName)
-      this.dockerURL = res
+      const { data: res } = await createDocker(this.dockerName)
+      this.dockerURL = res.url
+      this.containerid = res.containerid
       this.dockerState = true
     },
     async handleCloseDocker() {
-      const {data:res} = await closeDocker(this.dockerName)
+      const { data: res } = await closeDocker(this.containerid)
       this.dockerState = false
     }
   }
