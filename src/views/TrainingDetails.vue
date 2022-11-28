@@ -41,13 +41,22 @@
                 </a-col>
               </a-col>
             </a-row>
+            <a-row style="margin-top: 10px">
+              <a-col :span="6" :offset="9">
+                <a-input
+                  v-model="subForm.answer"
+                  placeholder="flag{}"
+                  size="middle"
+                />
+              </a-col>
+            </a-row>
             <a-row>
               <a-col
                 :span="8"
                 :offset="8"
                 style="text-align: center; margin-top: 10px"
               >
-                <a-button>提交答案</a-button>
+                <a-button @click="handleSubmit">提交答案</a-button>
               </a-col>
             </a-row>
           </a-form>
@@ -68,7 +77,11 @@
 
 <script>
 import { getCodeImg } from '@/api/login.js'
-import { createDocker, closeDocker } from '@/api/Training/docker.js'
+import {
+  createDocker,
+  closeDocker,
+  submitAnswer
+} from '@/api/Training/docker.js'
 
 export default {
   data() {
@@ -80,9 +93,12 @@ export default {
       containerid: '',
       dockerURL: '',
       trainingInfo: {
-        description: 'hihihi',
+        description: 'hihihi'
+      },
+      subForm: {
         code: '',
-        uuid: ''
+        uuid: '',
+        answer: ''
       }
     }
   },
@@ -106,6 +122,16 @@ export default {
     async handleCloseDocker() {
       const { data: res } = await closeDocker(this.containerid)
       this.dockerState = false
+    },
+    async handleSubmit() {
+      if (this.subForm.answer == '') {
+        alert('请输入flag')
+        return false
+      }
+      const saveForm = JSON.parse(JSON.stringify(this.subForm))
+      const { data: res } = await submitAnswer(saveForm)
+      if (res.code == 201) alert('flag正确')
+      else alert('flag错误')
     }
   }
 }

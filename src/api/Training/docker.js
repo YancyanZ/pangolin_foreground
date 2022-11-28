@@ -16,3 +16,12 @@ export function closeDocker(traingID) {
     method: 'get'
   })
 }
+
+//提交答案
+export function submitAnswer(data) {
+  return request({
+    url: '/container/removecontainer/',
+    method: 'post',
+    data: data
+  })
+}
