@@ -96,10 +96,8 @@ export default {
         description: 'hihihi'
       },
       subForm: {
-        code: '',
-        uuid: '',
         answer: '',
-        containerID: ''
+        containerId: ''
       }
     }
   },
@@ -131,9 +129,8 @@ export default {
         return false
       }
       const saveForm = JSON.parse(JSON.stringify(this.subForm))
-      const { data: res } = await submitAnswer(saveForm)
-      if (res.code == 201) alert('flag正确')
-      else alert('flag错误')
+      const res = await submitAnswer(saveForm)
+      console.log(res)
     }
   }
 }
