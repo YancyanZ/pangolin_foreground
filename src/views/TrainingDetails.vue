@@ -116,7 +116,7 @@ export default {
       const { data: res } = await createDocker(this.dockerName)
       this.dockerURL = res.url
       this.containerid = res.containerid
-      this.subForm.containerID = res.containerid
+      this.subForm.containerId = res.containerid
       this.dockerState = true
     },
     async handleCloseDocker() {
@@ -129,8 +129,9 @@ export default {
         return false
       }
       const saveForm = JSON.parse(JSON.stringify(this.subForm))
-      const res = await submitAnswer(saveForm)
-      console.log(res)
+      const { data: res } = await submitAnswer(saveForm)
+      if (res == 'true') alert('flag正确')
+      else alert('flag错误')
     }
   }
 }
