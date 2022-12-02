@@ -98,7 +98,8 @@ export default {
       subForm: {
         code: '',
         uuid: '',
-        answer: ''
+        answer: '',
+        containerID: ''
       }
     }
   },
@@ -117,6 +118,7 @@ export default {
       const { data: res } = await createDocker(this.dockerName)
       this.dockerURL = res.url
       this.containerid = res.containerid
+      this.subForm.containerID = res.containerid
       this.dockerState = true
     },
     async handleCloseDocker() {

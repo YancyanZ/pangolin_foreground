@@ -20,7 +20,7 @@ export function closeDocker(traingID) {
 //提交答案
 export function submitAnswer(data) {
   return request({
-    url: '/container/removecontainer/',
+    url: '/container/answer',
     method: 'post',
     data: data
   })
